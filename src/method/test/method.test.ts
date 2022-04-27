@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import * as API from "~/src"
 import * as s from "superstruct"
 import { AssertType } from "@thesunny/assert-type"
 import { AsyncReturnType } from "type-fest"
+import { logger } from "../../logger"
+import { API, Mock } from "~/src"
 
 describe("method", () => {
   const jestConsole = console
@@ -19,7 +20,7 @@ describe("method", () => {
     const handler = API.withHandler(async (props) => {
       return { ...props, b: 1 }
     })
-    const [response] = await API.callHandler(handler, { a: "alpha" })
+    const [response] = await Mock.callHandler(handler, { a: "alpha" })
     expect(response).toEqual({ a: "alpha", b: 1 })
   })
 
@@ -30,8 +31,15 @@ describe("method", () => {
           return { ...props, b: 1 }
         })
       )
-      const [response] = await API.callHandler(handler, { a: "alpha" })
-      expect(response).toEqual({ a: "alpha", b: 1 })
+      const logs = await logger.collect(async () => {
+        const [response] = await Mock.callHandler(handler, { a: "alpha" })
+        expect(response).toEqual({ a: "alpha", b: 1 })
+      })
+      expect(logs.length).toEqual(2)
+      expect(logs[0]).toMatch(/== Request .* ==/)
+      expect(logs[0]).toMatch(/a.*alpha/)
+      expect(logs[1]).toMatch(/== Response .* ==/i)
+      expect(logs[1]).toMatch(/b.*1/)
     })
 
     it("should execute a handler with logging that throws an error", async () => {
@@ -40,13 +48,17 @@ describe("method", () => {
           throw new Error("WTF")
         })
       )
-      const [response, , res] = await API.callHandler(handler, {
-        a: "alpha",
+      const logs = await logger.collect(async () => {
+        const [response, , res] = await Mock.callHandler(handler, {
+          a: "alpha",
+        })
+        expect(res.statusCode).toEqual(500)
+        // TODO: Make the statusMessage say "Internal Server Error" (NextJS bug)
+        // expect(res.statusMessage).toEqual("Internal Server Error")
+        expect(response).toContain("WTF")
       })
-      expect(res.statusCode).toEqual(500)
-      // TODO: Make the statusMessage say "Internal Server Error" (NextJS bug)
-      // expect(res.statusMessage).toEqual("Internal Server Error")
-      expect(response).toContain("WTF")
+      expect(logs[1]).toMatch(/== Error .* ==/)
+      expect(logs[1]).toMatch(/Error: WTF/)
     })
   })
 
@@ -58,7 +70,7 @@ describe("method", () => {
           return { at }
         })
       )
-      const [response] = await API.callHandler(handler, {})
+      const [response] = await Mock.callHandler(handler, {})
       expect(response).toEqual({ at: { $date: 946684800000 } })
     })
   })
@@ -82,10 +94,10 @@ describe("method", () => {
 
   describe("withJsendError", () => {
     it("should turn an error into a jsend error", async () => {
-      const method = API.withJSendError(async (props) => {
+      const method = API.withJSendError(async () => {
         throw new Error("WTF")
       })
-      const response = await API.callMethod(method, {})
+      const response = await Mock.callMethod(method, {})
       expect(response).toEqual({
         status: "error",
         message: expect.stringContaining("Error: WTF"),
@@ -104,7 +116,7 @@ describe("method", () => {
       AssertType.Equal<AsyncReturnType<typeof method>, { greeting: string }>(
         true
       )
-      const response = await API.callMethod(method, { name: "John Doe" })
+      const response = await Mock.callMethod(method, { name: "John Doe" })
       expect(response).toEqual({ greeting: "Hello John Doe" })
     })
 
@@ -114,7 +126,7 @@ describe("method", () => {
       })
       await expect(
         // @ts-ignore
-        API.callMethod(method, {})
+        Mock.callMethod(method, {})
       ).rejects.toThrow("At path: name -- Expected a string")
     })
   })
@@ -127,26 +139,32 @@ describe("method", () => {
     })
 
     it("should have all the parts of handler", async () => {
-      const [result] = await API.callHandler(handler, { name: "John Doe" })
-      expect(result).toEqual({
-        status: "success",
-        data: {
-          message: "Hello John Doe",
-          at: {
-            $date: 1650931200000,
+      const logs = await logger.collect(async () => {
+        const [result] = await Mock.callHandler(handler, { name: "John Doe" })
+        expect(result).toEqual({
+          status: "success",
+          data: {
+            message: "Hello John Doe",
+            at: {
+              $date: 1650931200000,
+            },
           },
-        },
+        })
       })
+      expect(logs.length).toEqual(2)
     })
 
     it("should handle a thrown error as jsend", async () => {
-      const [result] = await API.callHandler(handler, {})
-      expect(result).toEqual({
-        status: "error",
-        message: expect.stringContaining(
-          `Error validating API method props: At path: name`
-        ),
+      const logs = await logger.collect(async () => {
+        const [result] = await Mock.callHandler(handler, {})
+        expect(result).toEqual({
+          status: "error",
+          message: expect.stringContaining(
+            `Error validating API method props: At path: name`
+          ),
+        })
       })
+      expect(logs.length).toEqual(2)
     })
   })
 
@@ -157,9 +175,66 @@ describe("method", () => {
           return { message: "Hello World" }
         })
       )
-      const [, , res] = await API.callHandler(handler, {})
+      const [, , res] = await Mock.callHandler(handler, {})
       const allowOrigin = res.getHeader("access-control-allow-origin")
       expect(allowOrigin).toEqual("*")
+    })
+  })
+
+  describe("handler", () => {
+    const Props = s.object({
+      name: s.string(),
+    })
+
+    it("should create a standard handler with no options", async () => {
+      const handler = API.handler(Props, async (props) => {
+        return { status: "success", data: { message: `Hello ${props.name}` } }
+      })
+      const chunks = await logger.collect(async () => {
+        const [response, , res] = await Mock.callHandler(handler, {
+          name: "John",
+        })
+        expect(response).toEqual({
+          status: "success",
+          data: { message: `Hello John` },
+        })
+        const allowOrigin = res.getHeader("access-control-allow-origin")
+        expect(allowOrigin).toEqual(undefined)
+      })
+      expect(chunks.length).toEqual(2)
+    })
+
+    it("should create a standard handler with cors", async () => {
+      const handler = API.handler(Props, { cors: true }, async (props) => {
+        return { status: "success", data: { message: `Hello ${props.name}` } }
+      })
+      await logger.silence(async () => {
+        const [response, , res] = await Mock.callHandler(handler, {
+          name: "John",
+        })
+        expect(response).toEqual({
+          status: "success",
+          data: { message: `Hello John` },
+        })
+        const allowOrigin = res.getHeader("access-control-allow-origin")
+        expect(allowOrigin).toEqual("*")
+      })
+    })
+
+    it("should create a standard handler without logging", async () => {
+      const handler = API.handler(Props, { log: false }, async (props) => {
+        return { status: "success", data: { message: `Hello ${props.name}` } }
+      })
+      const chunks = await logger.collect(async () => {
+        const [response] = await Mock.callHandler(handler, {
+          name: "John",
+        })
+        expect(response).toEqual({
+          status: "success",
+          data: { message: `Hello John` },
+        })
+      })
+      expect(chunks.length).toEqual(0)
     })
   })
 })

@@ -1,3 +1,4 @@
+import { Server } from "http"
 import { NextApiRequest, NextApiResponse } from "next"
 import { JsonObject } from "type-fest"
 import { Handler, Method } from "../types"

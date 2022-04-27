@@ -4,15 +4,8 @@ import { JsonObject } from "type-fest"
 import { Method } from "../types"
 
 /**
- * Executes a minimal fake method call against the NextJS compatible method
- * and returns a minimal response.
- *
- * A few things to keep in mind:
- *
- * The response can be either `json` or `utf8`. If it's `json`, we get a
- * `json` property and if it's `utf8` we get a `data` property.
- *
- *
+ * Executes a minimal fake method call against a NextJS compatible API handler
+ * and returns a tuple with `[returnValue, req, res]`
  */
 export async function callHandler(
   handler: (req: NextApiRequest, res: NextApiResponse) => Promise<void>,
@@ -28,7 +21,6 @@ export async function callHandler(
 
   await handler(req, res)
 
-  const { statusCode, statusMessage } = res
   const isJSON = res._isJSON()
 
   /**
@@ -47,6 +39,10 @@ export async function callHandler(
   }
 }
 
+/**
+ * Executes a minimal fake method call against a bare bones method that hasn't
+ * been converted into a `Handler` yet.
+ */
 export async function callMethod<P, R>(
   method: Method<P, R>,
   props: P

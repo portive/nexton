@@ -3967,6 +3967,11 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.3"
     which-boxed-primitive "^1.0.2"
 
+unit-logger@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/unit-logger/-/unit-logger-1.0.2.tgz#99a2220dde5c6927935798f628390bca8329ce3b"
+  integrity sha512-umcNdO5n2nDOSngrJ1o5iB4HxAaMUqIhd8Cz8vbv5L1fw4n98bTzNn2QGpKseS78V/v3COO2lYGvsbuCcWHclg==
+
 universalify@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-0.1.2.tgz#b646f69be3942dabcecc9d6639c80dc105efaa66"

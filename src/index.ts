@@ -1,2 +1,3 @@
-export * from "./mock-call"
-export * from "./method"
+// export * from "./mock-call"
+export * as API from "./method"
+export * as Mock from "./mock"

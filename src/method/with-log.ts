@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { JsonObject } from "type-fest"
-import { debug } from "../debug"
+import * as debug from "../debug"
 import { Method } from "../types"
 
 let lastId = 0

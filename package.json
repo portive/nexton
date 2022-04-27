@@ -1,5 +1,5 @@
 {
-  "name": "@portive/next-api",
+  "name": "kinext",
   "version": "1.0.0",
   "license": "MIT",
   "main": ".dist/src/index.js",
@@ -14,7 +14,8 @@
     "next": "^12.1.5",
     "nextjs-cors": "^2.1.1",
     "node-mocks-http": "^1.11.0",
-    "superstruct": "^0.15.4"
+    "superstruct": "^0.15.4",
+    "unit-logger": "^1.0.2"
   },
   "devDependencies": {
     "@thesunny/assert-type": "^0.1.7",
