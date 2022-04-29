@@ -16,7 +16,7 @@ type InferParams<H extends StaticPropsHandler<ParsedUrlQuery, JsonObject>> =
  *
  * Ideally, I don't think we want this behavior.
  */
-export async function getStaticPaths<
+export function getStaticPaths<
   H extends StaticPropsHandler<ParsedUrlQuery, JsonObject>
 >(fn: GetStaticPaths<InferParams<H>>) {
   return fn

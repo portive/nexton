@@ -12,25 +12,14 @@ export const getStaticPaths = Web.getStaticPaths<typeof getStaticProps>(
   async () => {
     return {
       paths: [
-        { params: { name: "john", age: 25 } },
-        // { params: { name: "jane" } },
-        // { params: { name: "david" } },
+        { params: { name: "john" } },
+        { params: { name: "jane" } },
+        { params: { name: "david" } },
       ],
       fallback: true,
     }
   }
 )
-
-// export async function getStaticPaths() {
-//   return {
-//     paths: [
-//       { params: { name: "john" } },
-//       { params: { name: "jane" } },
-//       { params: { name: "david" } },
-//     ],
-//     fallback: true,
-//   }
-// }
 
 export default Web.page<typeof getStaticProps>(({ name }) => {
   return <div>Hello {name}</div>

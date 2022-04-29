@@ -61,7 +61,7 @@ export function getStaticProps<
   const propsTransform = Plugins.withProps(struct, fn)
   const dateTransform = Plugins.withDate(propsTransform)
   const logTransform = Plugins.withLog(
-    "StaticProps Query",
+    "StaticProps Params",
     "StaticProps Output",
     dateTransform
   )
