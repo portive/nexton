@@ -1,45 +1,15 @@
-import { DateJson, JsonToDateJson } from "@portive/date-json"
-import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next"
-import { ParsedUrlQuery } from "querystring"
-import React from "react"
+import { NextPage } from "next"
 import { JsonObject } from "type-fest"
 import { SideHandler } from "../types"
 import { getServerSideProps } from "./get-server-side-props"
 export * from "./get-server-side-props"
 
-// /**
-//  * NOTE:
-//  *
-//  * When working on this code, the GSSP is provided and not inferred. This is
-//  * why we don't capture a simpler generic like `Props`
-//  */
-// function page<GSSP extends GetServerSideProps<JsonObject>>(
-//   fn: NextPage<JsonToDateJson<InferGetServerSidePropsType<GSSP>>>
-// ) {
-//   type Props = InferGetServerSidePropsType<GSSP>
-//   return function ({ children, ...jsonProps }: React.PropsWithChildren<Props>) {
-//     const dateJsonProps = DateJson.fromJsonValue(jsonProps)
-//     // if (fn instanceof React.Component) {
-//     //   throw new Error(`Web.page works with function components only`)
-//     // }
-
-//     /**
-//      * This works but it has been challenging to get the type issues to
-//      * disappear.
-//      *
-//      * The problem is that `fn` could be a React.Component but I can't find a
-//      * way to discriminate `fn` to only be a Function component. The code above
-//      * `fn instanceof React.Component` doesn't seem to do the trick.
-//      */
-//     // TODO: Remove the @ts-ignore (see details above)
-//     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-//     // @ts-ignore
-//     return fn({ children, ...dateJsonProps })
-//   }
-// }
-
-function page<H extends SideHandler<ParsedUrlQuery, JsonObject>>(
-  nextPage: NextPage<H["Query"]>
+/**
+ * Remember the Generic is provided so we can't make it simpler. We have to
+ * infer from it.
+ */
+function page<H extends SideHandler<JsonObject>>(
+  nextPage: NextPage<Awaited<ReturnType<H>>>
 ) {
   return nextPage
 }

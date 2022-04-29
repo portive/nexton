@@ -1,12 +1,12 @@
 import { JSendError } from "./with-jsend"
-import { Transform } from "~/src/types"
+import { GenericMethod } from "~/src/types"
 
 export function withJSendError<
   I extends Record<string, unknown>,
   Args extends unknown[],
   O extends Record<string, unknown>
->(fn: Transform<I, Args, O>) {
-  const nextMethod: Transform<I, Args, O | JSendError> = async function (
+>(fn: GenericMethod<I, Args, O>) {
+  const nextMethod: GenericMethod<I, Args, O | JSendError> = async function (
     input: I,
     ...args: Args
   ) {

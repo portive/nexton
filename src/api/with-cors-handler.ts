@@ -1,7 +1,7 @@
 import NextCors from "nextjs-cors"
 import { NextApiRequest, NextApiResponse } from "next"
 import { JsonObject } from "type-fest"
-import { Handler } from "../types"
+import { APIHandler } from "../types"
 
 /**
  * Add CORS support to a method.
@@ -14,8 +14,8 @@ import { Handler } from "../types"
  */
 
 export function withCorsHandler<P extends JsonObject, R extends JsonObject>(
-  handler: Handler<P, R>
-): Handler<P, R> {
+  handler: APIHandler<P, R>
+): APIHandler<P, R> {
   return async function (req: NextApiRequest, res: NextApiResponse) {
     await NextCors(req, res, {
       methods: ["GET", "HEAD", "PUT", "PATCH", "POST", "DELETE", "OPTIONS"],
@@ -23,5 +23,5 @@ export function withCorsHandler<P extends JsonObject, R extends JsonObject>(
       optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
     })
     return await handler(req, res)
-  } as unknown as Handler<P, R>
+  } as unknown as APIHandler<P, R>
 }

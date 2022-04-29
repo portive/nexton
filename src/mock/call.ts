@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { createMocks } from "node-mocks-http"
 import { JsonObject } from "type-fest"
-import { Method } from "../types"
+import { APIMethod } from "../types"
 
 /**
  * Executes a minimal fake method call against a NextJS compatible API handler
@@ -44,7 +44,7 @@ export async function callHandler(
  * been converted into a `Handler` yet.
  */
 export async function callMethod<P, R>(
-  method: Method<P, R>,
+  method: APIMethod<P, R>,
   props: P
 ): Promise<R> {
   const { req, res } = createMocks<NextApiRequest, NextApiResponse>({

@@ -1,7 +1,7 @@
 import { Server } from "http"
 import { NextApiRequest, NextApiResponse } from "next"
 import { JsonObject } from "type-fest"
-import { Handler, Method } from "../types"
+import { APIHandler, APIMethod } from "../types"
 
 /**
  * Converts an API method (which is a more simplified form of the API definition)
@@ -10,7 +10,7 @@ import { Handler, Method } from "../types"
 export function withHandler<
   Props extends JsonObject,
   Response extends JsonObject
->(fn: Method<Props, Response>): Handler<Props, Response> {
+>(fn: APIMethod<Props, Response>): APIHandler<Props, Response> {
   const handler = async function (req: NextApiRequest, res: NextApiResponse) {
     const props = req.body
     try {
@@ -29,5 +29,5 @@ export function withHandler<
       res.status(500).send(error.stack)
     }
   }
-  return handler as unknown as Handler<Props, Response>
+  return handler as unknown as APIHandler<Props, Response>
 }

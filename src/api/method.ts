@@ -2,7 +2,7 @@ import { DateJsonObject } from "@portive/date-json"
 import * as s from "superstruct"
 import { JsonObject } from "type-fest"
 import { JSendObject } from "../plugins/with-jsend"
-import { Method } from "../types"
+import { APIMethod } from "../types"
 import { withHandler } from "./with-handler"
 import { withLog } from "../plugins/with-log"
 import { withDate } from "../plugins/with-date"
@@ -21,8 +21,8 @@ export function handler<
   R extends DateJsonObject & JSendObject
 >(
   struct: s.Struct<P>,
-  arg1: Method<P, R> | HandlerOptions,
-  arg2?: Method<P, R> | undefined
+  arg1: APIMethod<P, R> | HandlerOptions,
+  arg2?: APIMethod<P, R> | undefined
 ) {
   const method = getMethod(arg1, arg2)
   const options = getOptions(typeof arg1 === "function" ? {} : arg1)
@@ -39,8 +39,8 @@ export function handler<
 }
 
 function getMethod<P, R>(
-  arg1: Method<P, R> | HandlerOptions,
-  arg2?: Method<P, R> | undefined
+  arg1: APIMethod<P, R> | HandlerOptions,
+  arg2?: APIMethod<P, R> | undefined
 ) {
   if (typeof arg1 === "function") {
     return arg1

@@ -1,5 +1,5 @@
 import * as debug from "../debug"
-import { Transform } from "~/src/types"
+import { GenericMethod } from "~/src/types"
 
 let lastId = 0
 
@@ -10,8 +10,8 @@ export function withLog<
 >(
   inputCaption: string,
   outputCaption: string,
-  fn: Transform<I, Args, O>
-): Transform<I, Args, O> {
+  fn: GenericMethod<I, Args, O>
+): GenericMethod<I, Args, O> {
   return async function (input: I, ...args: Args): Promise<O> {
     /**
      * Keep track of the current `id` so that when we `console.log` details
