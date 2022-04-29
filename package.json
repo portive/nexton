@@ -7,6 +7,21 @@
   "files": [
     ".dist/**/*"
   ],
+  "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
+  "exports": {
+    "./api": "./.dist/src/api/index.js",
+    "./web": "./.dist/src/web/index.js"
+  },
+  "typesVersions": {
+    "*": {
+      "./api": [
+        "./.dist/src/api/index.d.ts"
+      ],
+      "./web": [
+        "./.dist/src/web/index.d.ts"
+      ]
+    }
+  },
   "dependencies": {
     "@portive/date-json": "^1.0.1",
     "chalk": "^4",
