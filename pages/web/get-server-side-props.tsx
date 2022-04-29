@@ -1,12 +1,16 @@
 import { InferGetServerSidePropsType } from "next"
 import { Web } from "~/src/web"
+import * as s from "superstruct"
 
-export const getServerSideProps = Web.getServerSideProps(async () => {
-  return {
-    name: "John",
-    at: new Date(),
+export const getServerSideProps = Web.getServerSideProps(
+  s.object({}),
+  async () => {
+    return {
+      name: "John",
+      at: new Date(),
+    }
   }
-})
+)
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
