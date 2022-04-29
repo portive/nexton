@@ -16,6 +16,22 @@ export function response(id: number, diff: number, response: unknown) {
   logger.log(lines.join("\n"))
 }
 
+export function output(
+  title: string,
+  id: number,
+  value: unknown,
+  diff?: number
+) {
+  const lines: string[] = []
+  if (typeof diff === "undefined") {
+    lines.push(chalk.hex("32cd32")(`== ${title} (${id}) ==`))
+  } else {
+    lines.push(chalk.hex("32cd32")(`== ${title} (${id}) ${diff}ms ==`))
+  }
+  lines.push(jsome.getColoredString(value))
+  logger.log(lines.join("\n"))
+}
+
 export function error(id: number, error?: Error) {
   const lines: string[] = []
   lines.push(chalk.hex("b22222")(`== Error (${id}) ==`))

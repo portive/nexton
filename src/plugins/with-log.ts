@@ -1,18 +1,14 @@
-import { NextApiRequest, NextApiResponse } from "next"
-import { JsonObject } from "type-fest"
 import * as debug from "../debug"
-import { Method } from "../types"
+import { Transform } from "~/src/types"
 
 let lastId = 0
 
-export function withLog<P extends JsonObject, R extends JsonObject>(
-  fn: Method<P, R>
-): Method<P, R> {
-  return async function (
-    props: P,
-    req: NextApiRequest,
-    res: NextApiResponse
-  ): Promise<R> {
+export function withLog<
+  I extends Record<string, unknown>,
+  Args extends unknown[],
+  O extends Record<string, unknown>
+>(fn: Transform<I, Args, O>): Transform<I, Args, O> {
+  return async function (input: I, ...args: Args): Promise<O> {
     /**
      * Keep track of the current `id` so that when we `console.log` details
      * of the execution, we can match the start of the request with the end.
@@ -24,10 +20,10 @@ export function withLog<P extends JsonObject, R extends JsonObject>(
     /**
      * Debug Request Info
      */
-    debug.request(id, props)
+    debug.request(id, input)
 
     try {
-      const response = await fn(props, req, res)
+      const response = await fn(input, ...args)
       const diff = Date.now() - startAt
       /**
        * Debug Response Info

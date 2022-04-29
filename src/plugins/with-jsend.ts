@@ -1,5 +1,4 @@
-import { Method } from "../types"
-import { JsonObject } from "type-fest"
+import { Transform } from "../types"
 
 /**
  * djsend related types and method. Same as `jsend` but accepts `Date` objects
@@ -28,6 +27,10 @@ export type JSendError = { status: "error"; message: string }
  */
 export type JSendObject = JSendSuccess | JSendFail | JSendError
 
-export function withJSend<P, R extends JSendObject>(fn: Method<P, R>) {
+export function withJSend<
+  I extends Record<string, unknown>,
+  Args extends unknown[],
+  O extends JSendObject
+>(fn: Transform<I, Args, O>): Transform<I, Args, O> {
   return fn
 }
