@@ -7,7 +7,11 @@ export function withLog<
   I extends Record<string, unknown>,
   Args extends unknown[],
   O extends Record<string, unknown>
->(fn: Transform<I, Args, O>): Transform<I, Args, O> {
+>(
+  inputCaption: string,
+  outputCaption: string,
+  fn: Transform<I, Args, O>
+): Transform<I, Args, O> {
   return async function (input: I, ...args: Args): Promise<O> {
     /**
      * Keep track of the current `id` so that when we `console.log` details
@@ -20,7 +24,7 @@ export function withLog<
     /**
      * Debug Request Info
      */
-    debug.request(id, input)
+    debug.output(inputCaption, id, input)
 
     try {
       const response = await fn(input, ...args)
@@ -28,7 +32,7 @@ export function withLog<
       /**
        * Debug Response Info
        */
-      debug.response(id, diff, response)
+      debug.output(outputCaption, id, response, diff)
       return response
     } catch (e: unknown) {
       const error = e as Error

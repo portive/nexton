@@ -25,13 +25,6 @@ export type Method<P, R> = (
   res: NextApiResponse
 ) => Promise<R>
 
-// export type PropsFunction<Q, R> = (
-//   query: Q,
-//   context: GetServerSidePropsContext
-// ) => Promise<R>
-
-// export type GetProps<I, R> = (input: I) => Promise<R>
-
 /**
  * Defines a function type that takes a primary input and returns some sort of
  * primary output. It also allows for an arbitrary number of additional
@@ -53,6 +46,9 @@ export type SideHandler<Q extends ParsedUrlQuery, O extends JsonObject> = (
   context: GetServerSidePropsContext
 ) => Promise<{ props: O }> & { Query: Q; PageProps: O }
 
+/**
+ * Defines a valid simple method function to be passed into getServerSideProps
+ */
 export type SideMethod<Q, O> = (
   query: Q,
   context: GetServerSidePropsContext

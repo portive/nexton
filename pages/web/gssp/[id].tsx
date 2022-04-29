@@ -1,6 +1,7 @@
 import { InferGetServerSidePropsType } from "next"
 import { Web } from "~/src/web"
 import * as s from "superstruct"
+import { AssertType } from "@thesunny/assert-type"
 
 const Query = s.object({
   id: s.string(),
@@ -22,6 +23,9 @@ export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
 export default Web.page<typeof getServerSideProps>((props) => {
   const { id, name, at } = props
+  AssertType.Equal<typeof id, string>(true)
+  AssertType.Equal<typeof name, string>(true)
+  AssertType.Equal<typeof at, Date>(true)
   return (
     <p>
       Hello Again {name} {JSON.stringify(at)}: id {id}

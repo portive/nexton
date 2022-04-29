@@ -30,7 +30,9 @@ export function handler<
   const jsendMethod = withJSend(propsMethod)
   const jsendErrorMethod = withJSendError(jsendMethod)
   const dateMethod = withDate(jsendErrorMethod)
-  const maybeLogMethod = options.log ? withLog(dateMethod) : dateMethod
+  const maybeLogMethod = options.log
+    ? withLog("Request", "Response", dateMethod)
+    : dateMethod
   const handler = withHandler(maybeLogMethod)
   const maybeCorsHandler = options.cors ? withCorsHandler(handler) : handler
   return maybeCorsHandler

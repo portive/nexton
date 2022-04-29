@@ -10,8 +10,9 @@ describe("getServerSideProps", () => {
     const getServerSideProps = Web.getServerSideProps(Query, async (query) => {
       return { message: `Hello ${query.name}` }
     })
+
     it("should call a getServerSideProps with a context", async () => {
-      const chunks = await logger.record(async () => {
+      const chunks = await logger.collect(async () => {
         const [output] = await Mock.callSideHandler(
           { name: "John Doe" },
           getServerSideProps
@@ -19,23 +20,32 @@ describe("getServerSideProps", () => {
         expect(output).toEqual({ message: "Hello John Doe" })
       })
       expect(chunks.length).toEqual(2)
+      expect(chunks[0]).toContain("SideProps Query")
+      expect(chunks[1]).toContain("SideProps Output")
     })
 
     it("should raise an error if the query is invalid", async () => {
-      await expect(
-        Mock.callSideHandler({ INVALID: "John Doe" }, getServerSideProps)
-      ).rejects.toThrow("Error validating input props")
+      const chunks = await logger.collect(async () => {
+        await expect(
+          Mock.callSideHandler({ INVALID: "John Doe" }, getServerSideProps)
+        ).rejects.toThrow("Error validating input props")
+      })
+      expect(chunks.length).toEqual(2)
+      expect(chunks[0]).toContain("SideProps Query")
+      expect(chunks[1]).toContain("Error validating input props")
     })
 
     it("should convert a DateJson to JSON", async () => {
       const EmptyQuery = s.object({})
-      const [output] = await Mock.callSideHandler(
-        {},
-        Web.getServerSideProps(EmptyQuery, async () => {
-          return { at: new Date("2022-01-01") }
-        })
-      )
-      expect(output).toEqual({ at: { $date: 1640995200000 } })
+      await logger.silence(async () => {
+        const [output] = await Mock.callSideHandler(
+          {},
+          Web.getServerSideProps(EmptyQuery, async () => {
+            return { at: new Date("2022-01-01") }
+          })
+        )
+        expect(output).toEqual({ at: { $date: 1640995200000 } })
+      })
     })
   })
 })

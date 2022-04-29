@@ -23,6 +23,10 @@ export function getServerSideProps<
 >(struct: s.Struct<Q>, fn: SideMethod<Q, O>) {
   const propsTransform = Plugins.withProps(struct, fn)
   const dateTransform = Plugins.withDate(propsTransform)
-  const logTransform = Plugins.withLog(dateTransform)
+  const logTransform = Plugins.withLog(
+    "SideProps Query",
+    "SideProps Output",
+    dateTransform
+  )
   return withGetServerSideProps(logTransform)
 }

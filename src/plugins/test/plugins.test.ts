@@ -19,9 +19,13 @@ import * as Plugins from ".."
 describe("method", () => {
   describe("withLog", () => {
     it("should execute a handler with logging", async () => {
-      const transform = Plugins.withLog(async (props) => {
-        return { ...props, b: 1 }
-      })
+      const transform = Plugins.withLog(
+        "Request",
+        "Response",
+        async (props) => {
+          return { ...props, b: 1 }
+        }
+      )
       const logs = await logger.collect(async () => {
         const response = await transform({ a: "alpha" })
         expect(response).toEqual({ a: "alpha", b: 1 })
@@ -34,7 +38,7 @@ describe("method", () => {
     })
 
     it("should execute a handler with logging that throws an error", async () => {
-      const transforms = Plugins.withLog(async () => {
+      const transforms = Plugins.withLog("Request", "Response", async () => {
         throw new Error("WTF")
       })
       const logs = await logger.collect(async () => {
