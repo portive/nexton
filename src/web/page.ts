@@ -1,5 +1,6 @@
 import { JsonToDateJson, DateJson } from "@portive/date-json"
 import { NextPage } from "next"
+import { ParsedUrlQuery } from "querystring"
 import { JsonObject } from "type-fest"
 import { SideHandler, StaticPropsHandler } from "../types"
 
@@ -9,7 +10,7 @@ import { SideHandler, StaticPropsHandler } from "../types"
  */
 type InferPageProps<SH> = SH extends SideHandler<infer O>
   ? O
-  : SH extends StaticPropsHandler<infer O>
+  : SH extends StaticPropsHandler<ParsedUrlQuery, infer O>
   ? O
   : never
 
@@ -30,7 +31,7 @@ type EmptyObject = {
 export function page<
   SH extends
     | SideHandler<JsonObject>
-    | StaticPropsHandler<JsonObject> = SideHandler<EmptyObject>
+    | StaticPropsHandler<ParsedUrlQuery, JsonObject> = SideHandler<EmptyObject>
 >(fn: NextPage<JsonToDateJson<InferPageProps<SH>>>) {
   const PageWithJsonProps: NextPage<InferPageProps<SH>> = function ({
     children,

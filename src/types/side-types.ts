@@ -34,6 +34,7 @@ export type StaticPropsMethod<P, O> = (
   params: P,
   context: StaticPropsContext
 ) => Promise<O>
-export type StaticPropsHandler<O extends JsonObject> = (
-  context: StaticPropsContext
-) => Promise<O> & { PageProps: O }
+export type StaticPropsHandler<
+  Q extends ParsedUrlQuery,
+  O extends JsonObject
+> = (context: StaticPropsContext) => Promise<O> & { PageProps: O }

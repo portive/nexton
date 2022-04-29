@@ -4,6 +4,8 @@ export const getStaticProps = async (
   context: GetStaticPropsContext<{ name: string }>
 ) => {
   const { params } = context
+  if (params === undefined) throw new Error(`Expected params to be defined`)
+
   return { props: { name: params.name } }
 }
 

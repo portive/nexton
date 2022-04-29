@@ -13,7 +13,7 @@ import { WebResponse } from "./web-response"
 
 function withGetStaticProps<P extends ParsedUrlQuery, O extends JsonObject>(
   fn: StaticPropsMethod<P, O>
-): StaticPropsHandler<O> {
+): StaticPropsHandler<P, O> {
   const handler = async function (
     context: StaticPropsContext
   ): Promise<GetStaticPropsResult<O>> {
@@ -51,13 +51,13 @@ function withGetStaticProps<P extends ParsedUrlQuery, O extends JsonObject>(
       throw e
     }
   }
-  return handler as unknown as StaticPropsHandler<O>
+  return handler as unknown as StaticPropsHandler<P, O>
 }
 
 export function getStaticProps<
-  Q extends ParsedUrlQuery,
+  P extends ParsedUrlQuery,
   O extends DateJsonObject
->(struct: s.Struct<Q>, fn: StaticPropsMethod<Q, O>) {
+>(struct: s.Struct<P>, fn: StaticPropsMethod<P, O>) {
   const propsTransform = Plugins.withProps(struct, fn)
   const dateTransform = Plugins.withDate(propsTransform)
   const logTransform = Plugins.withLog(
