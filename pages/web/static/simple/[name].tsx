@@ -16,7 +16,7 @@ export const getStaticPaths = Web.getStaticPaths<typeof getStaticProps>(
         { params: { name: "jane" } },
         { params: { name: "david" } },
       ],
-      fallback: true,
+      fallback: false,
     }
   }
 )
