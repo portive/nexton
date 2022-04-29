@@ -9,7 +9,7 @@ import { GetServerSidePropsResult } from "next"
 function withGetServerSideProps<Q extends ParsedUrlQuery, O extends JsonObject>(
   fn: SideMethod<Q, O>
 ): SideHandler<O> {
-  return async function (
+  const handler = async function (
     context: SideContext
   ): Promise<GetServerSidePropsResult<O>> {
     /**
@@ -23,6 +23,7 @@ function withGetServerSideProps<Q extends ParsedUrlQuery, O extends JsonObject>(
     const output = await fn(query, context)
     return { props: output }
   }
+  return handler as unknown as SideHandler<O>
 }
 
 export function getServerSideProps<
@@ -36,6 +37,5 @@ export function getServerSideProps<
     "SideProps Output",
     dateTransform
   )
-  const handler = withGetServerSideProps(logTransform)
-  return handler
+  return withGetServerSideProps(logTransform)
 }

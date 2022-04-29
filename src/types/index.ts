@@ -45,7 +45,7 @@ export type APIMethod<P, R> = (
  */
 export type SideHandler<O extends JsonObject> = (
   context: SideContext
-) => Promise<GetServerSidePropsResult<O>>
+) => Promise<GetServerSidePropsResult<O>> & { PageProps: O }
 
 /**
  * Defines a valid simple method function to be passed into getServerSideProps
