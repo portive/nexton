@@ -2,6 +2,10 @@ import * as DateJson from "@portive/date-json"
 import { DateJsonObject } from "@portive/date-json"
 import { GenericMethod } from "../types"
 
+/**
+ * Adds Date support to return values by converting them from DateJsonObject
+ * to a plain JsonObject
+ */
 export function withDate<
   I extends Record<string, unknown>,
   Args extends unknown[],

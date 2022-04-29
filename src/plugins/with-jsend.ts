@@ -27,6 +27,9 @@ export type JSendError = { status: "error"; message: string }
  */
 export type JSendObject = JSendSuccess | JSendFail | JSendError
 
+/**
+ * Ensures that the return value is a JSend Object.
+ */
 export function withJSend<
   I extends Record<string, unknown>,
   Args extends unknown[],

@@ -2,6 +2,10 @@ import { GenericMethod } from "../types"
 import * as s from "superstruct"
 import { createWithScopedErrors } from "~/src/utils/create-with-scoped-errors"
 
+/**
+ * Adds input validation using SuperStruct and will throw an Error if the
+ * input is not the right shape.
+ */
 export function withProps<
   I extends Record<string, unknown>,
   Args extends unknown[],

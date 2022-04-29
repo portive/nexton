@@ -3,6 +3,10 @@ import { GenericMethod } from "~/src/types"
 
 let lastId = 0
 
+/**
+ * Adds input and output logging so developers can easily see what's
+ * happening in their terminal while they are developing.
+ */
 export function withLog<
   I extends Record<string, unknown>,
   Args extends unknown[],
