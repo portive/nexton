@@ -21,7 +21,8 @@ type InferPagePropsFromSideHandler<SH> = SH extends SideHandler<infer O>
  * - types the `props` argument using `typeof getServerSideProps` in generic
  * - ensures returned value is valid (React Element or null)
  */
-export function page<SH extends SideHandler<JsonObject>>(
+// eslint-disable-next-line @typescript-eslint/ban-types
+export function page<SH extends SideHandler<JsonObject> = SideHandler<{}>>(
   fn: NextPage<JsonToDateJson<InferPagePropsFromSideHandler<SH>>>
 ) {
   const PageWithJsonProps: NextPage<InferPagePropsFromSideHandler<SH>> =
