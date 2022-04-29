@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from "querystring"
 import * as Plugins from "~/src/plugins"
 import { SideHandler, SideContext, SideMethod } from "../types"
 import { GetServerSidePropsResult } from "next"
+import { WebResponse } from "./web-response"
 
 function withGetServerSideProps<Q extends ParsedUrlQuery, O extends JsonObject>(
   fn: SideMethod<Q, O>
@@ -20,8 +21,31 @@ function withGetServerSideProps<Q extends ParsedUrlQuery, O extends JsonObject>(
      * of `GetServerSidePropsContext`)
      */
     const query = context.query as Q
-    const output = await fn(query, context)
-    return { props: output }
+    try {
+      const output = await fn(query, context)
+      return { props: output }
+    } catch (e) {
+      if (e instanceof WebResponse) {
+        /**
+         * This is hacky, but it's okay. If a `WebResponse` is thrown and
+         * caught here, it probably means one of two things have happened.
+         * Either a `notFound` or a `redirect`. None of these affect the
+         * output value that we need to get the input props for the Page.
+         *
+         * It is possible that in the future `WebResponse` could throw a
+         * `props` response which could have an affect, but in that scenario,
+         * you should probably be using `return` instead of the throwing out
+         * method and in if you insist on doing so, we should probably presume
+         * you know what you're doing and it's handling a special use case.
+         *
+         * If that were to happen, you may have to manually override the
+         * generic to include the special case.
+         */
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return e.value as any
+      }
+      throw e
+    }
   }
   return handler as unknown as SideHandler<O>
 }
