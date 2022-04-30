@@ -11,6 +11,7 @@
   "exports": {
     "./api": "./.dist/src/api/index.js",
     "./client": "./.dist/src/client/index.js",
+    "./mock": "./.dist/src/mock/index.js",
     "./web": "./.dist/src/web/index.js"
   },
   "typesVersions": {
@@ -20,6 +21,9 @@
       ],
       "client": [
         "./.dist/src/client/index.d.ts"
+      ],
+      "mock": [
+        "./.dist/src/mock/index.d.ts"
       ],
       "web": [
         "./.dist/src/web/index.d.ts"
