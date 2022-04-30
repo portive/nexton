@@ -14,10 +14,10 @@
   },
   "typesVersions": {
     "*": {
-      "./api": [
+      "api": [
         "./.dist/src/api/index.d.ts"
       ],
-      "./web": [
+      "web": [
         "./.dist/src/web/index.d.ts"
       ]
     }
