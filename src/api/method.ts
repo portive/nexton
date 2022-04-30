@@ -16,6 +16,9 @@ type HandlerOptions = {
   log?: boolean
 }
 
+/**
+ * Create an API Handler
+ */
 export function handler<
   P extends JsonObject,
   R extends DateJsonObject //& JSendObject
@@ -34,6 +37,9 @@ export function handler<
   return maybeCorsHandler
 }
 
+/**
+ * Create an API Handler with support for jsend built into it.
+ */
 export function jsend<
   P extends JsonObject,
   R extends DateJsonObject & JSendObject

@@ -10,12 +10,16 @@
   "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
   "exports": {
     "./api": "./.dist/src/api/index.js",
+    "./client": "./.dist/src/client/index.js",
     "./web": "./.dist/src/web/index.js"
   },
   "typesVersions": {
     "*": {
       "api": [
         "./.dist/src/api/index.d.ts"
+      ],
+      "client": [
+        "./.dist/src/client/index.d.ts"
       ],
       "web": [
         "./.dist/src/web/index.d.ts"
