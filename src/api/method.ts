@@ -18,39 +18,38 @@ type HandlerOptions = {
 
 export function handler<
   P extends JsonObject,
+  R extends DateJsonObject //& JSendObject
+>(
+  struct: s.Struct<P>,
+  method: APIMethod<P, R>,
+  { log = true, cors = false }: HandlerOptions = {}
+) {
+  const propsMethod = withProps(struct, method)
+  const dateMethod = withDate(propsMethod)
+  const maybeLogMethod = log
+    ? withLog("Request", "Response", dateMethod)
+    : dateMethod
+  const handler = withHandler(maybeLogMethod)
+  const maybeCorsHandler = cors ? withCorsHandler(handler) : handler
+  return maybeCorsHandler
+}
+
+export function jsend<
+  P extends JsonObject,
   R extends DateJsonObject & JSendObject
 >(
   struct: s.Struct<P>,
-  arg1: APIMethod<P, R> | HandlerOptions,
-  arg2?: APIMethod<P, R> | undefined
+  method: APIMethod<P, R>,
+  { log = true, cors = false }: HandlerOptions = {}
 ) {
-  const method = getMethod(arg1, arg2)
-  const options = getOptions(typeof arg1 === "function" ? {} : arg1)
   const propsMethod = withProps(struct, method)
   const jsendMethod = withJSend(propsMethod)
   const jsendErrorMethod = withJSendError(jsendMethod)
   const dateMethod = withDate(jsendErrorMethod)
-  const maybeLogMethod = options.log
+  const maybeLogMethod = log
     ? withLog("Request", "Response", dateMethod)
     : dateMethod
   const handler = withHandler(maybeLogMethod)
-  const maybeCorsHandler = options.cors ? withCorsHandler(handler) : handler
+  const maybeCorsHandler = cors ? withCorsHandler(handler) : handler
   return maybeCorsHandler
-}
-
-function getMethod<P, R>(
-  arg1: APIMethod<P, R> | HandlerOptions,
-  arg2?: APIMethod<P, R> | undefined
-) {
-  if (typeof arg1 === "function") {
-    return arg1
-  } else if (typeof arg2 === "function") {
-    return arg2
-  } else {
-    throw new Error(`Expected a function for argument 2 or 3`)
-  }
-}
-
-function getOptions({ cors = false, log = true }: HandlerOptions) {
-  return { cors, log }
 }

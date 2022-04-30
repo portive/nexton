@@ -68,8 +68,13 @@ export default function Index() {
           <Card>
             <Card.Header className="fw-bold">API (Client/API)</Card.Header>
             <ListGroup variant="flush">
-              <Link href="/web/api/simple">
-                <ListGroup.Item action>Simple API Call</ListGroup.Item>
+              <Link href="/web/api/date">
+                <ListGroup.Item action>
+                  API from Browser DateJson
+                </ListGroup.Item>
+              </Link>
+              <Link href="/web/api/server-date">
+                <ListGroup.Item action>API from Server DateJson</ListGroup.Item>
               </Link>
             </ListGroup>
           </Card>

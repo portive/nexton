@@ -34,19 +34,6 @@ describe("method", () => {
       })
       expect(logs.length).toEqual(2)
     })
-
-    it("should handle a thrown error as jsend", async () => {
-      const logs = await logger.collect(async () => {
-        const [result] = await Mock.callHandler(handler, {})
-        expect(result).toEqual({
-          status: "error",
-          message: expect.stringContaining(
-            `Error validating input props: At path: name`
-          ),
-        })
-      })
-      expect(logs.length).toEqual(2)
-    })
   })
 
   describe("withCorsHandler", () => {
@@ -59,6 +46,33 @@ describe("method", () => {
       const [, , res] = await Mock.callHandler(handler, {})
       const allowOrigin = res.getHeader("access-control-allow-origin")
       expect(allowOrigin).toEqual("*")
+    })
+  })
+
+  describe("jsend", () => {
+    const Props = s.object({
+      name: s.string(),
+    })
+
+    const jsendHandler = API.jsend(Props, async (props) => {
+      return { status: "success", data: { message: `Hello ${props.name}` } }
+    })
+
+    it("should handle a thrown error as jsend", async () => {
+      const logs = await logger.collect(async () => {
+        /**
+         * The empty object will result in an error which should get returned
+         * as a `jsend` Error object.
+         */
+        const [result] = await Mock.callHandler(jsendHandler, {})
+        expect(result).toEqual({
+          status: "error",
+          message: expect.stringContaining(
+            `Error validating input props: At path: name`
+          ),
+        })
+      })
+      expect(logs.length).toEqual(2)
     })
   })
 
@@ -86,9 +100,13 @@ describe("method", () => {
     })
 
     it("should create a standard handler with cors", async () => {
-      const handler = API.handler(Props, { cors: true }, async (props) => {
-        return { status: "success", data: { message: `Hello ${props.name}` } }
-      })
+      const handler = API.handler(
+        Props,
+        async (props) => {
+          return { status: "success", data: { message: `Hello ${props.name}` } }
+        },
+        { cors: true }
+      )
       await logger.silence(async () => {
         const [response, , res] = await Mock.callHandler(handler, {
           name: "John",
@@ -103,9 +121,13 @@ describe("method", () => {
     })
 
     it("should create a standard handler without logging", async () => {
-      const handler = API.handler(Props, { log: false }, async (props) => {
-        return { status: "success", data: { message: `Hello ${props.name}` } }
-      })
+      const handler = API.handler(
+        Props,
+        async (props) => {
+          return { status: "success", data: { message: `Hello ${props.name}` } }
+        },
+        { log: false }
+      )
       const chunks = await logger.collect(async () => {
         const [response] = await Mock.callHandler(handler, {
           name: "John",

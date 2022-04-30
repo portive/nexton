@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <B.Container color="white">
           <Link href="/">
             <Navbar.Brand className="text-white" style={{ cursor: "pointer" }}>
-              NextDoor
+              NextDoor <span className="text-muted">for Next.js</span>
             </Navbar.Brand>
           </Link>
         </B.Container>
