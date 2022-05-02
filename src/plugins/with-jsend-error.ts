@@ -1,5 +1,5 @@
 import { JSendError } from "./with-jsend"
-import { GenericMethod } from "~/src/types"
+import { GenericMethod } from "../types"
 
 /**
  * Adds support for a JSendError if the inner functions throw an error.

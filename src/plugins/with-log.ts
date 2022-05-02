@@ -1,5 +1,5 @@
 import * as debug from "../debug"
-import { GenericMethod } from "~/src/types"
+import { GenericMethod } from "../types"
 
 let lastId = 0
 
