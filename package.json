@@ -1,9 +1,9 @@
 {
   "name": "nexton",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "license": "MIT",
-  "main": ".dist/src/index.js",
-  "types": ".dist/src/index.d.ts",
+  "main": "./.dist/src/index.js",
+  "types": "./.dist/src/index.d.ts",
   "files": [
     ".dist/**/*"
   ],
