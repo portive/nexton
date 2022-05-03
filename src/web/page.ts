@@ -28,7 +28,7 @@ type EmptyObject = {
  * - types the `props` argument using `typeof getServerSideProps` in generic
  * - ensures returned value is valid (React Element or null)
  */
-export function page<
+export function Page<
   SH extends
     | SideHandler<JsonObject>
     | StaticPropsHandler<ParsedUrlQuery, JsonObject> = SideHandler<EmptyObject>
