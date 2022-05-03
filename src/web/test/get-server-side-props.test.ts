@@ -18,8 +18,8 @@ describe("getServerSideProps", () => {
         expect(output).toEqual({ message: "Hello John Doe" })
       })
       expect(chunks.length).toEqual(2)
-      expect(chunks[0]).toContain("SideProps Query")
-      expect(chunks[1]).toContain("SideProps Output")
+      expect(chunks[0]).toContain("getServerSideProps Query")
+      expect(chunks[1]).toContain("getServerSideProps Response")
     })
 
     it("should raise an error if the query is invalid", async () => {
