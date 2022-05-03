@@ -1,14 +1,18 @@
 {
   "name": "nexton",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "license": "MIT",
-  "main": ".dist/src/index.js",
-  "types": ".dist/src/index.d.ts",
+  "main": ".dist/cjs/src/index.js",
+  "types": ".dist/cjs/src/index.d.ts",
   "files": [
     ".dist/**/*"
   ],
   "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
   "exports": {
+    ".": {
+      "require": "./.dist/cjs/src/index.js",
+      "import": "./.dist/mjs/src/index.js"
+    },
     "./api": {
       "require": "./.dist/cjs/src/api/all.js",
       "import": "./.dist/mjs/src/api/all.js"
@@ -28,6 +32,9 @@
   },
   "typesVersions": {
     "*": {
+      ".": [
+        "./.dist/cjs/src/index.d.ts"
+      ],
       "api": [
         "./.dist/cjs/src/api/all.d.ts"
       ],
