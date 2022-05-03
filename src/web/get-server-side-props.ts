@@ -57,8 +57,8 @@ export function getServerSideProps<
   const propsTransform = Plugins.withProps(struct, fn)
   const dateTransform = Plugins.withDate(propsTransform)
   const logTransform = Plugins.withLog(
-    "SideProps Query",
-    "SideProps Output",
+    "getServerSideProps Query",
+    "getServerSideProps Response",
     dateTransform
   )
   return withGetServerSideProps(logTransform)
