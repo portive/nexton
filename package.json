@@ -1,6 +1,6 @@
 {
   "name": "nexton",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "license": "MIT",
   "main": ".dist/cjs/src/index.js",
   "types": ".dist/cjs/src/index.d.ts",
@@ -11,26 +11,9 @@
   "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
   "exports": {
     "./package.json": "./package.json",
-    "./api/package.json": "./api/package.json",
-    ".": {
-      "require": "./.dist/cjs/src/index.js",
-      "import": "./.dist/mjs/src/index.js"
-    },
-    "./api": {
-      "require": "./.dist/cjs/src/api/all.js",
-      "import": "./.dist/mjs/src/api/all.js"
-    },
-    "./client": {
-      "require": "./.dist/cjs/src/client/all.js",
-      "import": "./.dist/mjs/src/client/all.js"
-    },
-    "./mock": {
-      "require": "./.dist/cjs/src/mock/all.js",
-      "import": "./.dist/mjs/src/mock/all.js"
-    },
-    "./web": {
-      "require": "./.dist/cjs/src/web/all.js",
-      "import": "./.dist/mjs/src/web/all.js"
+    "./*": {
+      "require": "./.dist/cjs/src/*",
+      "import": "./.dist/mjs/src/*s"
     }
   },
   "typesVersions": {
