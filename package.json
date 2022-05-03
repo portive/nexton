@@ -10,7 +10,6 @@
     "api/package.json",
     "api.js"
   ],
-  "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
   "exports": {
     ".": {
       "require": "./.dist/cjs/src/index.js",
