@@ -1,6 +1,6 @@
 {
   "name": "nexton",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "license": "MIT",
   "main": ".dist/src/index.js",
   "types": ".dist/src/index.d.ts",
@@ -98,7 +98,7 @@
     "build:npm:split": "rm -rf ./.dist/ && yarn test:once && tsc -p tsconfig.build-cjs.json && tsc -p tsconfig.build-mjs.json && echo 'Finished Building'",
     "build:npm:watch": "rm -rf ./.dist/ && tsc -p tsconfig.ts-build.json --watch",
     "publish:npm": "yarn publish:npm:patch",
-    "publish:npm:patch": "yarn build:npm:once && yarn version --patch && yarn publish --non-interactive || echo '\"npm publish --access=public\" to publish to npm'",
+    "publish:npm:patch": "yarn build:npm:split && yarn version --patch && yarn publish --non-interactive || echo '\"npm publish --access=public\" to publish to npm'",
     "-- next": "# NextJs",
     "start:dev": "DOTENV=.env/dev.env next dev -p 3404",
     "-- end": "# end"
