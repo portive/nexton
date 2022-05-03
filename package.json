@@ -1,6 +1,6 @@
 {
   "name": "nexton",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "license": "MIT",
   "main": ".dist/cjs/src/index.js",
   "module": ".dist/mjs/src/index.js",
