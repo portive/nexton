@@ -59,12 +59,22 @@ export async function call<H extends APIHandler<JsonObject, JsonObject>>(
   }
 }
 
+const _call = call
+
 export function create(baseUrl: string) {
   if (!baseUrl.startsWith("http://") && !baseUrl.startsWith("https://")) {
     throw new Error(`baseUrl must start with http:// or https://`)
   }
   if (baseUrl.endsWith("/")) {
     throw new Error(`baseUrl must not end in /`)
+  }
+
+  async function call<H extends APIHandler<JsonObject, JsonObject>>(
+    subpath: string,
+    props: InferProps<H>
+  ) {
+    const url = `${baseUrl}/${subpath}`
+    return await _call(url, props)
   }
 
   return { call }
