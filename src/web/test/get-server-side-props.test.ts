@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-import { Web } from ".."
-import { Mock } from "~/src"
-import { logger } from "~/src/logger"
+import { logger, Web, Mock } from "~/src"
 import * as s from "superstruct"
 
 describe("getServerSideProps", () => {

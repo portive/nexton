@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import * as s from "superstruct"
-import { logger } from "../../logger"
-import { API, Mock } from "~/src"
+import { logger, API, Mock } from "~/src"
 
 describe("method", () => {
   it("should execute a simple mock call on a handler", async () => {

@@ -1,2 +1,3 @@
-import * as API from "./all"
-export { API }
+import * as API from "./_index"
+export default API
+export * from "./_index"

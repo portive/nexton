@@ -1,2 +1,3 @@
-import * as Client from "./all"
-export { Client }
+import * as Client from "./_index"
+export default Client
+export * from "./_index"
