@@ -1,6 +1,6 @@
 {
   "name": "nexton",
-  "version": "1.0.21",
+  "version": "1.0.22",
   "license": "MIT",
   "main": ".dist/cjs/src/index.js",
   "types": ".dist/cjs/src/index.d.ts",
@@ -38,16 +38,16 @@
         "./.dist/cjs/src/index.d.ts"
       ],
       "api": [
-        "./.dist/cjs/src/api/all.d.ts"
+        "./.dist/cjs/src/api/index.d.ts"
       ],
       "client": [
-        "./.dist/cjs/src/client/all.d.ts"
+        "./.dist/cjs/src/client/index.d.ts"
       ],
       "mock": [
-        "./.dist/cjs/src/mock/all.d.ts"
+        "./.dist/cjs/src/mock/index.d.ts"
       ],
       "web": [
-        "./.dist/cjs/src/web/all.d.ts"
+        "./.dist/cjs/src/web/index.d.ts"
       ]
     }
   },
