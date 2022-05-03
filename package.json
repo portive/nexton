@@ -11,9 +11,25 @@
   "-- multiple entry points": "# https://blog.mozilla.org/data/2021/04/07/this-week-in-glean-publishing-glean-js/",
   "exports": {
     "./package.json": "./package.json",
+    "./api": {
+      "require": "./.dist/cjs/src/api/index.js",
+      "import": "./.dist/mjs/src/api/index.js"
+    },
+    "./client": {
+      "require": "./.dist/cjs/src/client/index.js",
+      "import": "./.dist/mjs/src/client/index.js"
+    },
+    "./mock": {
+      "require": "./.dist/cjs/src/mock/index.js",
+      "import": "./.dist/mjs/src/mock/index.js"
+    },
+    "./web": {
+      "require": "./.dist/cjs/src/web/index.js",
+      "import": "./.dist/mjs/src/web/index.js"
+    },
     "./*": {
-      "require": "./.dist/cjs/src/*",
-      "import": "./.dist/mjs/src/*s"
+      "require": "./.dist/cjs/src/*.js",
+      "import": "./.dist/mjs/src/*.js"
     }
   },
   "typesVersions": {

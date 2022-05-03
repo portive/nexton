@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.build-cjs.json",
+  "compilerOptions": {
+    /**
+     * This version targets `esnext` which uses module syntax.
+     */
+    "module": "esnext",
+    /**
+     * - emit to `outDir` of `.dist/mjs`
+     */
+    "outDir": ".dist/mjs"
+  }
+}

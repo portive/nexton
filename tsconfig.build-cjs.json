@@ -19,7 +19,7 @@
      */
     "declaration": true,
     "noEmit": false,
-    "outDir": ".dist",
+    "outDir": ".dist/cjs",
     "jsx": "react-jsx"
   },
   /**
