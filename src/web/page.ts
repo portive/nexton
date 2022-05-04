@@ -8,7 +8,7 @@ import { SideHandler, StaticPropsHandler } from "../types"
  * Infer
  * https://blog.logrocket.com/understanding-infer-typescript/#:~:text=Using%20infer%20in%20TypeScript,to%20be%20referenced%20or%20returned.
  */
-type InferPageProps<SH> = SH extends SideHandler<infer O>
+export type InferPageProps<SH> = SH extends SideHandler<infer O>
   ? O
   : SH extends StaticPropsHandler<ParsedUrlQuery, infer O>
   ? O
