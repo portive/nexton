@@ -35,6 +35,12 @@ export type StaticPropsMethod<P, O> = (
   context: StaticPropsContext
 ) => Promise<O>
 export type StaticPropsHandler<
+  /**
+   * I'm not 100% on this at the time I wrote this comment, but I believe this
+   * is needed so that when we pass around this type, the `Q` type is available
+   * so that we can use it elsewhere by inferring from it.
+   */
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Q extends ParsedUrlQuery,
   O extends JsonObject
 > = (context: StaticPropsContext) => Promise<O> & { PageProps: O }

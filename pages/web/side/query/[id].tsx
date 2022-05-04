@@ -1,5 +1,5 @@
 import { InferGetServerSidePropsType } from "next"
-import { Web } from "~/src/web"
+import Web from "~/src/web"
 import * as s from "superstruct"
 import { AssertType } from "@thesunny/assert-type"
 
@@ -21,7 +21,7 @@ export const getServerSideProps = Web.getServerSideProps(
 
 export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
 
-export default Web.page<typeof getServerSideProps>((props) => {
+export default Web.Page<typeof getServerSideProps>((props) => {
   const { id, name, at } = props
   AssertType.Equal<typeof id, string>(true)
   AssertType.Equal<typeof name, string>(true)

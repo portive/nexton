@@ -4,7 +4,6 @@ import { JsonObject } from "type-fest"
 import { JSendObject } from "../plugins/with-jsend"
 import { APIMethod } from "../types"
 import { withHandler } from "./with-handler"
-import { withLog } from "../plugins/with-log"
 import { withDate } from "../plugins/with-date"
 import { withJSend } from "../plugins/with-jsend"
 import { withJSendError } from "../plugins/with-jsend-error"
@@ -29,10 +28,7 @@ export function handler<
 ) {
   const propsMethod = withProps(struct, method)
   const dateMethod = withDate(propsMethod)
-  const maybeLogMethod = log
-    ? withLog("Request", "Response", dateMethod)
-    : dateMethod
-  const handler = withHandler(maybeLogMethod)
+  const handler = withHandler(dateMethod, { log })
   const maybeCorsHandler = cors ? withCorsHandler(handler) : handler
   return maybeCorsHandler
 }
@@ -52,10 +48,7 @@ export function jsend<
   const jsendMethod = withJSend(propsMethod)
   const jsendErrorMethod = withJSendError(jsendMethod)
   const dateMethod = withDate(jsendErrorMethod)
-  const maybeLogMethod = log
-    ? withLog("Request", "Response", dateMethod)
-    : dateMethod
-  const handler = withHandler(maybeLogMethod)
+  const handler = withHandler(dateMethod, { log })
   const maybeCorsHandler = cors ? withCorsHandler(handler) : handler
   return maybeCorsHandler
 }

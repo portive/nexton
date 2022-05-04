@@ -1,4 +1,4 @@
-import { GetStaticProps, GetStaticPropsContext } from "next"
+import { GetStaticPropsContext } from "next"
 
 export const getStaticProps = async (
   context: GetStaticPropsContext<{ name: string }>

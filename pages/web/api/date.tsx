@@ -1,9 +1,9 @@
-import { Web } from "~/src/web"
-import { Client } from "~/src/client"
+import Web from "~/src/web"
+import Client from "~/src/client"
 import { useEffect, useState } from "react"
 import Handler from "~/pages/api/date-json"
 
-export default Web.page(() => {
+export default Web.Page(() => {
   const [name, setName] = useState<string>()
   const [at, setAt] = useState<Date>()
 

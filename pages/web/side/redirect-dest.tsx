@@ -1,4 +1,4 @@
-import { Web } from "~/src/web"
+import Web from "~/src/web"
 import Link from "next/link"
 import * as s from "superstruct"
 
@@ -9,7 +9,7 @@ export const getServerSideProps = Web.getServerSideProps(
   }
 )
 
-export default Web.page<typeof getServerSideProps>(({ count }) => {
+export default Web.Page<typeof getServerSideProps>(({ count }) => {
   return (
     <p>
       Redirect destination count {count}{" "}

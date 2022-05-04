@@ -1,4 +1,4 @@
-import { Web } from "~/src/web"
+import Web from "~/src/web"
 import * as s from "superstruct"
 
 export const getServerSideProps = Web.getServerSideProps(
@@ -13,6 +13,6 @@ export const getServerSideProps = Web.getServerSideProps(
   }
 )
 
-export default Web.page<typeof getServerSideProps>(() => {
+export default Web.Page<typeof getServerSideProps>(() => {
   return <p>Redirect destination (this text is never shown)</p>
 })

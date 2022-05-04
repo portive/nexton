@@ -4,12 +4,5 @@
 {
   "extends": "./tsconfig.base.json",
   "compilerOptions": {},
-  "exclude": [
-    "node_modules",
-    /**
-     * Ignore pages because that's just for a demo and is not part of final
-     * package.
-     */
-    "pages"
-  ]
+  "exclude": ["node_modules"]
 }

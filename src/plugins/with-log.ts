@@ -28,7 +28,11 @@ export function withLog<
     /**
      * Debug Request Info
      */
-    debug.output(inputCaption, id, input)
+    debug.output({
+      title: inputCaption,
+      id,
+      value: input,
+    })
 
     try {
       const response = await fn(input, ...args)
@@ -36,7 +40,12 @@ export function withLog<
       /**
        * Debug Response Info
        */
-      debug.output(outputCaption, id, response, diff)
+      debug.output({
+        title: outputCaption,
+        id,
+        value: response,
+        diff,
+      })
       return response
     } catch (e: unknown) {
       const error = e as Error

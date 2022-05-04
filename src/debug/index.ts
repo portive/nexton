@@ -16,17 +16,27 @@ export function response(id: number, diff: number, response: unknown) {
   logger.log(lines.join("\n"))
 }
 
-export function output(
-  title: string,
-  id: number,
-  value: unknown,
+export function output({
+  title,
+  id,
+  info,
+  value,
+  diff,
+}: {
+  title: string
+  id: number
+  info?: string
+  value: unknown
   diff?: number
-) {
+}) {
   const lines: string[] = []
   if (typeof diff === "undefined") {
     lines.push(chalk.hex("32cd32")(`== ${title} (${id}) ==`))
   } else {
     lines.push(chalk.hex("32cd32")(`== ${title} (${id}) ${diff}ms ==`))
+  }
+  if (typeof info === "string") {
+    lines.push(chalk.hex("e0e0a0")(info))
   }
   lines.push(jsome.getColoredString(value))
   logger.log(lines.join("\n"))

@@ -1,4 +1,4 @@
-import { Web } from "~/src/web"
+import Web from "~/src/web"
 import * as s from "superstruct"
 
 export const getStaticProps = Web.getStaticProps(
@@ -21,6 +21,6 @@ export const getStaticPaths = Web.getStaticPaths<typeof getStaticProps>(
   }
 )
 
-export default Web.page<typeof getStaticProps>(({ name }) => {
+export default Web.Page<typeof getStaticProps>(({ name }) => {
   return <div>Hello {name}</div>
 })

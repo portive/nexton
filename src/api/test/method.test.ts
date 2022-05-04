@@ -4,9 +4,12 @@ import { logger, API, Mock } from "~/src"
 
 describe("method", () => {
   it("should execute a simple mock call on a handler", async () => {
-    const handler = API.withHandler(async (props) => {
-      return { ...props, b: 1 }
-    })
+    const handler = API.withHandler(
+      async (props) => {
+        return { ...props, b: 1 }
+      },
+      { log: false }
+    )
     const [response] = await Mock.callHandler(handler, { a: "alpha" })
     expect(response).toEqual({ a: "alpha", b: 1 })
   })
@@ -38,9 +41,12 @@ describe("method", () => {
   describe("withCorsHandler", () => {
     it("should add CORS headers", async () => {
       const handler = API.withCorsHandler(
-        API.withHandler(async () => {
-          return { message: "Hello World" }
-        })
+        API.withHandler(
+          async () => {
+            return { message: "Hello World" }
+          },
+          { log: false }
+        )
       )
       const [, , res] = await Mock.callHandler(handler, {})
       const allowOrigin = res.getHeader("access-control-allow-origin")

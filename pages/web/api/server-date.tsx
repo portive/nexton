@@ -1,5 +1,5 @@
-import { Web } from "~/src/web"
-import { Client } from "~/src/client"
+import Web from "~/src/web"
+import Client from "~/src/client"
 import * as s from "superstruct"
 import Handler from "~/pages/api/date-json"
 
@@ -15,7 +15,7 @@ export const getServerSideProps = Web.getServerSideProps(Query, async () => {
   return { name: response.name, at: response.at }
 })
 
-export default Web.page<typeof getServerSideProps>(({ name, at }) => {
+export default Web.Page<typeof getServerSideProps>(({ name, at }) => {
   return (
     <>
       <h1>Call API from Server</h1>
