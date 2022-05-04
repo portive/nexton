@@ -11,7 +11,7 @@ export class WebResponse {
 /**
  * Call it in `Web.getServerSideProps` to return a 404 Not Found
  */
-export function notFound() {
+export function notFound(): never {
   throw new WebResponse({ notFound: true })
 }
 
@@ -19,6 +19,6 @@ export function notFound() {
  * Call it in `Web.getServerSideProps` to redirect either temporary or
  * permanent.
  */
-export function redirect(destination: string, permanent: boolean) {
+export function redirect(destination: string, permanent: boolean): never {
   throw new WebResponse({ redirect: { destination, permanent } })
 }
