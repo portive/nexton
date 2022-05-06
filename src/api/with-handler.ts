@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next"
 import { JsonObject } from "type-fest"
 import { APIHandler, APIMethod } from "../types"
-import * as debug from "~/src/debug"
+import * as debug from "../../src/debug"
 
 let lastId = 0
 
