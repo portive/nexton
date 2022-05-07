@@ -1,6 +1,5 @@
 import { InferGetServerSidePropsType } from "next"
-import Web from "~/src/web"
-import * as s from "superstruct"
+import Web, { s } from "~/src/web"
 
 export const getServerSideProps = Web.getServerSideProps(
   s.object({}),

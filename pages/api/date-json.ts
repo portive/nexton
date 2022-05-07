@@ -1,5 +1,4 @@
-import API from "~/src/api"
-import * as s from "superstruct"
+import API, { s } from "~/src/api"
 
 const Props = s.object({ name: s.string() })
 
