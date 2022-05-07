@@ -5,14 +5,19 @@ import { JsonObject } from "type-fest"
 import { SideHandler, StaticPropsHandler } from "../types"
 
 /**
- * Infer
+ * Infer that Raw Page Props (i.e. with `{ $date: number }` not decoded)
  * https://blog.logrocket.com/understanding-infer-typescript/#:~:text=Using%20infer%20in%20TypeScript,to%20be%20referenced%20or%20returned.
  */
-export type InferPageProps<SH> = SH extends SideHandler<infer O>
+type InferRawPageProps<SH> = SH extends SideHandler<infer O>
   ? O
   : SH extends StaticPropsHandler<ParsedUrlQuery, infer O>
   ? O
   : never
+
+/**
+ * Infer the PageProps with dates decoded.
+ */
+export type InferPageProps<SH> = JsonToDateJson<InferRawPageProps<SH>>
 
 type EmptyObject = {
   /* empty */
@@ -32,8 +37,8 @@ export function Page<
   SH extends
     | SideHandler<JsonObject>
     | StaticPropsHandler<ParsedUrlQuery, JsonObject> = SideHandler<EmptyObject>
->(fn: NextPage<JsonToDateJson<InferPageProps<SH>>>) {
-  const PageWithJsonProps: NextPage<InferPageProps<SH>> = function ({
+>(fn: NextPage<InferPageProps<SH>>) {
+  const PageWithJsonProps: NextPage<InferRawPageProps<SH>> = function ({
     children,
     ...jsonProps
   }) {

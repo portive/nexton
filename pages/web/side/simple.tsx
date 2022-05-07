@@ -1,4 +1,3 @@
-import { InferGetServerSidePropsType } from "next"
 import Web, { s } from "~/src/web"
 
 export const getServerSideProps = Web.getServerSideProps(
@@ -11,9 +10,9 @@ export const getServerSideProps = Web.getServerSideProps(
   }
 )
 
-export type Props = InferGetServerSidePropsType<typeof getServerSideProps>
+export type PageProps = Web.InferPageProps<typeof getServerSideProps>
 
-export default Web.Page<typeof getServerSideProps>((props) => {
+export default Web.Page<typeof getServerSideProps>((props: PageProps) => {
   const { name, at } = props
   return (
     <>
