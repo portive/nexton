@@ -14,32 +14,32 @@
     ".": {
       "require": "./.dist/cjs/src/index.js",
       "import": "./.dist/mjs/src/index.js",
-      "types": "./.dist/types/src/index.d.ts"
+      "types": "./.dist/cjs/src/index.d.ts"
     },
     "./api": {
       "require": "./.dist/cjs/src/api/index.js",
       "import": "./.dist/mjs/src/api/index.js",
-      "types": "./.dist/types/src/api/index.d.ts"
+      "types": "./.dist/cjs/src/api/index.d.ts"
     },
     "./client": {
       "require": "./.dist/cjs/src/client/index.js",
       "import": "./.dist/mjs/src/client/index.js",
-      "types": "./.dist/types/src/client/index.d.ts"
+      "types": "./.dist/cjs/src/client/index.d.ts"
     },
     "./mock": {
       "require": "./.dist/cjs/src/mock/index.js",
       "import": "./.dist/mjs/src/mock/index.js",
-      "types": "./.dist/types/src/mock/index.d.ts"
+      "types": "./.dist/cjs/src/mock/index.d.ts"
     },
     "./web": {
       "require": "./.dist/cjs/src/web/index.js",
       "import": "./.dist/mjs/src/web/index.js",
-      "types": "./.dist/types/src/web/index.d.ts"
+      "types": "./.dist/cjs/src/web/index.d.ts"
     },
     "./*": {
       "require": "./.dist/cjs/src/*.js",
       "import": "./.dist/mjs/src/*.js",
-      "types": "./.dist/types/src/*.d.ts"
+      "types": "./.dist/cjs/src/*.d.ts"
     },
     "./package.json": "./package.json"
   },

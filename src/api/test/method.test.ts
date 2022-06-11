@@ -59,9 +59,13 @@ describe("method", () => {
       name: s.string(),
     })
 
-    const jsendHandler = API.jsend(Props, async (props) => {
-      return { status: "success", data: { message: `Hello ${props.name}` } }
-    })
+    const jsendHandler = API.jsend(
+      Props,
+      async (props) => {
+        return { status: "success", data: { message: `Hello ${props.name}` } }
+      },
+      { cors: true }
+    )
 
     it("should handle a thrown error as jsend", async () => {
       const logs = await logger.collect(async () => {
@@ -69,13 +73,15 @@ describe("method", () => {
          * The empty object will result in an error which should get returned
          * as a `jsend` Error object.
          */
-        const [result] = await Mock.callHandler(jsendHandler, {})
+        const [result, , res] = await Mock.callHandler(jsendHandler, {})
         expect(result).toEqual({
           status: "error",
           message: expect.stringContaining(
             `Error validating input props: At path: name`
           ),
         })
+        const allowOrigin = res.getHeader("access-control-allow-origin")
+        expect(allowOrigin).toEqual("*")
       })
       expect(logs.length).toEqual(2)
     })
