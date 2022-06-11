@@ -1,0 +1,10 @@
+{
+  "description": "Used with @thesunny/presets, preset exports",
+  "exports": {
+    ".": "src/index.ts",
+    "api": "src/api/index.ts",
+    "client": "src/client/index.ts",
+    "mock": "src/mock/index.ts",
+    "web": "src/web/index.ts"
+  }
+}
