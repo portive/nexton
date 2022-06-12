@@ -1,5 +1,6 @@
 {
-  "description": "Used with @thesunny/presets, preset exports",
+  "description": "Used with @thesunny/presets, 'yarn preset exports'",
+  "instructions": "add exports mappings to 'exports' below",
   "exports": {
     ".": "src/index.ts",
     "api": "src/api/index.ts",
