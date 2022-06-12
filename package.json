@@ -1,6 +1,6 @@
 {
   "name": "nexton",
-  "version": "1.0.39",
+  "version": "1.0.40",
   "license": "MIT",
   "main": ".dist/cjs/src/index.js",
   "module": ".dist/mjs/src/index.js",
@@ -31,7 +31,6 @@
       "import": "./.dist/mjs/src/web/index.js",
       "types": "./.dist/cjs/src/web/index.d.ts"
     },
-    "./package.json": "./package.json",
     "./*": {
       "require": "./.dist/cjs/src/*.js",
       "import": "./.dist/mjs/src/*.js",
