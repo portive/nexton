@@ -102,7 +102,7 @@
     "fix:prettier": "yarn lint:prettier --write",
     "fix:eslint": "yarn lint:eslint --fix",
     "-- lint": "# lint syntax",
-    "lint": "yarn lint:prettier && yarn lint:eslint && yarn lint:tsc",
+    "lint": "concurrently 'yarn lint:prettier' 'yarn lint:eslint' 'yarn lint:tsc'",
     "lint:prettier": "prettier --check \"**/*.{css,md,js,jsx,json,ts,tsx}\"",
     "lint:eslint": "eslint .",
     "lint:tsc": "tsc --build ./ --force",
