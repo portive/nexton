@@ -1,4 +1,4 @@
-import { DateJsonObject } from "@portive/date-json"
+import { DateJsonObject } from "ejson-date"
 import { JsonObject } from "type-fest"
 import * as s from "superstruct"
 import { ParsedUrlQuery } from "querystring"

@@ -4,7 +4,7 @@ import {
   StaticPropsHandler,
 } from "../types"
 import { ParsedUrlQuery } from "querystring"
-import { DateJsonObject } from "@portive/date-json"
+import { DateJsonObject } from "ejson-date"
 import { JsonObject } from "type-fest"
 import * as Plugins from "../plugins"
 import * as s from "superstruct"

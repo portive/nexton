@@ -1,4 +1,4 @@
-import { JsonToDateJson, DateJson } from "@portive/date-json"
+import { JsonToDateJson, DateJson } from "ejson-date"
 import { NextPage } from "next"
 import { ParsedUrlQuery } from "querystring"
 import { JsonObject } from "type-fest"

@@ -1,4 +1,4 @@
-import { JsonToDateJson, fromJsonValue } from "@portive/date-json"
+import { JsonToDateJson, fromJsonValue } from "ejson-date"
 import { JsonObject } from "type-fest"
 import { APIHandler } from "../types"
 import { handleErrorResponse } from "./handle-error"

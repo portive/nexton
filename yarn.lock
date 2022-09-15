@@ -634,11 +634,6 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.5.tgz#db5a11bf66bdab39569719555b0f76e138d7bd64"
   integrity sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==
 
-"@portive/date-json@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@portive/date-json/-/date-json-1.0.1.tgz#6166f9558be33bb61948d099350561252337b312"
-  integrity sha512-32sbhXlabNYDt/8qZjVsuQzr2h8EPjllffhZ4fJEQ9bprXhbemSklzBPmmKdKjFaCMp4zdCQGSXgyvfWV+H6qw==
-
 "@react-aria/ssr@^3.0.1":
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/@react-aria/ssr/-/ssr-3.1.2.tgz#665a6fd56385068c7417922af2d0d71b0618e52d"
@@ -1559,6 +1554,11 @@ domexception@^2.0.1:
   integrity sha512-yxJ2mFy/sibVQlu5qHjOkf9J3K6zgmCxgJ94u2EdvDOV09H+32LtRswEcUsmUWN72pVLOEnTSRaIVVzVQgS0dg==
   dependencies:
     webidl-conversions "^5.0.0"
+
+ejson-date@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/ejson-date/-/ejson-date-1.0.7.tgz#1a1bf7c555afc02692995b643b311c180a6ae2a6"
+  integrity sha512-vcdfhgn8ltY+vrMbUa+nbu/wp6x9fMiTNbWY2HtHW7JTjzEKzrCCq8xRf27yG6q7AE9j8DDEX0za1+pXWM83zg==
 
 electron-to-chromium@^1.4.118:
   version "1.4.121"

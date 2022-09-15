@@ -1,5 +1,4 @@
-import * as DateJson from "@portive/date-json"
-import { DateJsonObject } from "@portive/date-json"
+import { DateJsonObject, DateJsonToJson, toJsonValue } from "ejson-date"
 import { GenericMethod } from "../types"
 
 /**
@@ -10,12 +9,10 @@ export function withDate<
   I extends Record<string, unknown>,
   Args extends unknown[],
   O extends DateJsonObject
->(
-  fn: GenericMethod<I, Args, O>
-): GenericMethod<I, Args, DateJson.DateJsonToJson<O>> {
+>(fn: GenericMethod<I, Args, O>): GenericMethod<I, Args, DateJsonToJson<O>> {
   const nextFn = async function (props: I, ...args: Args) {
     const response = await fn(props, ...args)
-    return DateJson.toJsonValue(response)
+    return toJsonValue(response)
   }
   return nextFn
 }
