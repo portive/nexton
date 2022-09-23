@@ -1555,10 +1555,10 @@ domexception@^2.0.1:
   dependencies:
     webidl-conversions "^5.0.0"
 
-ejson-date@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/ejson-date/-/ejson-date-1.0.7.tgz#1a1bf7c555afc02692995b643b311c180a6ae2a6"
-  integrity sha512-vcdfhgn8ltY+vrMbUa+nbu/wp6x9fMiTNbWY2HtHW7JTjzEKzrCCq8xRf27yG6q7AE9j8DDEX0za1+pXWM83zg==
+ejson-date@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/ejson-date/-/ejson-date-1.0.8.tgz#eb36534e1aed5bef7c4d7b4bbc8ce0c9b1030c6a"
+  integrity sha512-VWELKka/3wTE2BVxtuucZLLyznEsIGb5/5i9r+sxSTvoOq9lgWTXJpQbZnMUtMSG/GMxwKyq8kB4d+JbJYEGMg==
 
 electron-to-chromium@^1.4.118:
   version "1.4.121"
@@ -4219,10 +4219,10 @@ uncontrollable@^7.2.1:
     invariant "^2.2.4"
     react-lifecycles-compat "^3.0.4"
 
-unit-logger@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/unit-logger/-/unit-logger-1.0.2.tgz#99a2220dde5c6927935798f628390bca8329ce3b"
-  integrity sha512-umcNdO5n2nDOSngrJ1o5iB4HxAaMUqIhd8Cz8vbv5L1fw4n98bTzNn2QGpKseS78V/v3COO2lYGvsbuCcWHclg==
+unit-logger@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/unit-logger/-/unit-logger-1.0.3.tgz#ffbabe5bbe46a148caa2452641b4add05ffa90c5"
+  integrity sha512-VkKS2D5cO/IKwfALhOtFsPjksvZcwFGA8Uasx++hmj1+8mFvEV4P1pSi4B7F0wn5WFj82qO40qvARLeY9oXu/A==
 
 universalify@^0.1.2:
   version "0.1.2"
