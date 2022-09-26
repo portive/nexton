@@ -14,12 +14,12 @@ export default function Index() {
             color: "#3078b0",
           }}
         >
-          NextDoor
+          Nexton
         </h1>
         <p style={{ maxWidth: 640 }} className="mb-4">
-          The following links are samples used during the development of
-          NextDoor and examples we can use for testing to make sure that
-          NextDoor works in the current Next.js environment.
+          The following links are samples used during the development of Nexton
+          and examples we can use for testing to make sure that Nexton works in
+          the current Next.js environment.
         </p>
       </div>
 

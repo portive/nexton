@@ -117,6 +117,8 @@
     "publish:npm:patch": "yarn build && yarn version --patch && yarn publish --non-interactive || echo '\"npm publish --access=public\" to publish to npm'",
     "-- next": "# NextJs",
     "start:dev": "DOTENV=.env/dev.env next dev -p 3404",
+    "-- open": "# Open browser",
+    "open": "open -a 'google chrome' http://localhost:3404",
     "-- end": "# end"
   }
 }

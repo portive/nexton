@@ -11,7 +11,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         <B.Container color="white">
           <Link href="/">
             <Navbar.Brand className="text-white" style={{ cursor: "pointer" }}>
-              <span style={{ fontSize: 24, marginRight: 8 }}>NextDoor</span>
+              <span style={{ fontSize: 24, marginRight: 8 }}>Nexton</span>
               <span style={{ fontSize: 17 }} className="text-muted">
                 — Better Type Safety for Next.js
               </span>
