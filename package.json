@@ -61,10 +61,12 @@
     "next": "^12.1.5",
     "nextjs-cors": "^2.1.1",
     "node-mocks-http": "^1.11.0",
-    "react": ">=17",
-    "react-dom": ">=17",
     "superstruct": "^0.15.4",
     "unit-logger": "^1.0.3"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-dom": ">=17"
   },
   "devDependencies": {
     "@thesunny/assert-type": "^0.1.13",
